@@ -11,13 +11,13 @@ export class Car {
 
 export class Tire {
   public needsChange() {
-    return false;
+    return false
   }
 }
 
 export class FuelTank {
   public isEmpty() {
-    return false;
+    return false
   }
 }
 
@@ -30,31 +30,31 @@ export class Brakes {
 }
 
 export class SolidCar {
-  private readonly brakes = new Brakes();
-  private readonly engine = new Engine();
+  private readonly brakes = new Brakes()
+  private readonly engine = new Engine()
   private readonly tires: Tire[] = [
     new Tire(),
     new Tire(),
     new Tire(),
     new Tire()
-  ];
-  private readonly fuelTank = new FuelTank();
+  ]
+  private readonly fuelTank = new FuelTank()
 
   public run() {
-    this.engine.accelerate();
+    this.engine.accelerate()
   }
 
   public stop() {
-    this.brakes.brake();
+    this.brakes.brake()
   }
 
   public tiresNeedToBeChanged() {
-    return this.tires.every(tire => !tire.needsChange());
+    return this.tires.every(tire => !tire.needsChange())
   }
 
   public shouldRefuel() {
     if (this.fuelTank.isEmpty()) {
-      return "refuel";
+      return 'refuel'
     }
   }
 }

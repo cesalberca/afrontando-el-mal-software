@@ -1,15 +1,15 @@
 // "many client-specific interfaces are better than one general-purpose interface."
 interface Car {
-  refuel: () => void;
-  charge: () => void;
+  refuel: () => void
+  charge: () => void
 }
 
 interface Refiller {
-  refuel: () => void;
+  refuel: () => void
 }
 
 interface Charger {
-  charge: () => void;
+  charge: () => void
 }
 
 class HybridCar implements Refiller, Charger {

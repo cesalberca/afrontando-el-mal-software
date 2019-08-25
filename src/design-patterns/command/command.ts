@@ -1,3 +1,3 @@
 export interface Command<Result = void, Options = void> {
-  execute(options: Options): Promise<Result>;
+  execute(options: Options): Promise<Result>
 }

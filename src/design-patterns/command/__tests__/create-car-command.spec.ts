@@ -14,7 +14,6 @@ describe('CreateCarCommand', () => {
     const expected: Car = new GasolineCar(gasolineEngine)
 
     const actual = await command.execute()
-    console.log(actual)
 
     expect(actual).toEqual(expected)
   })

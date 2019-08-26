@@ -1,12 +1,15 @@
 import { Link } from './link'
 import { EmptyLink } from './empty-link'
 import { Context } from './context'
+import { Logger } from './logger'
 
 export class LoggerLink implements Link {
-  nextLink: Link = new EmptyLink()
+  private nextLink: Link = new EmptyLink()
+
+  constructor(private readonly logger: Logger) {}
 
   async next(context: Context) {
-    console.log(
+    this.logger.log(
       `${new Date().toISOString()} - ${
         context.command.constructor.name
       } - ${JSON.stringify(context.result, null, 2)}`

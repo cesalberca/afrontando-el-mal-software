@@ -8,14 +8,37 @@ body {
   font-family: sans-serif;
 }
 
+h1 {
+  font-weight: normal;
+}
+
 main {
   display: flex;
+  flex-direction: column;
   height: 100vh;
   width: 100%;
   justify-content: center;
   align-items: center;
+  transition: 0.25s ease-in-out all;
 }
 
-h1 {
-  font-weight: normal;
+main.is-loading {
+  filter: blur(10px);
+}
+
+.spinner {
+  position: absolute;
+  display: none;
+  align-items: center;
+  justify-content: center;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  z-index: 2;
+  height: 100vh;
+  width: 100%;
+}
+
+.spinner.show {
+  display: flex;
 }

@@ -1,10 +1,10 @@
 import { CreateCarCommand } from '../create-car-command'
 import {
-  Engine,
-  GasolineEngine,
   Car,
-  GasolineCar
-} from '../../solid/dependency-inversion'
+  Engine,
+  GasolineCar,
+  GasolineEngine
+} from '../../../solid/dependency-inversion'
 
 describe('CreateCarCommand', () => {
   it('should create a car', async () => {

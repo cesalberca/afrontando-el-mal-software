@@ -4,7 +4,7 @@ import {
   GasolineEngine,
   Engine,
   Car
-} from './../../solid/dependency-inversion'
+} from '../../solid/dependency-inversion'
 
 export class CreateCarCommand implements Command<Car> {
   async execute(): Promise<Car> {

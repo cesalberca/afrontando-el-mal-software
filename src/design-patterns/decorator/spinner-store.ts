@@ -18,4 +18,8 @@ export class SpinnerStore {
   get(): Observable<State> {
     return this.state.asObservable()
   }
+
+  value(): State {
+    return this.state.getValue()
+  }
 }

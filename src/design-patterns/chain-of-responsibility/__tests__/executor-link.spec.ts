@@ -1,39 +1,31 @@
 import { ExecutorLink } from '../executor-link'
 import { Command } from '../../command/command'
 import { Context } from '../context'
+import { anything, instance, mock, verify, when } from 'ts-mockito'
 
 describe('ExecutorLink', () => {
   it('should execute a given command', async () => {
-    expect.assertions(1)
-    const { executorLink } = setup()
-    const mock: Command = {
-      execute: jest.fn()
-    }
+    const { executorLink, commandMock, command } = setup()
+    when(commandMock.execute(anything())).thenResolve()
 
-    await executorLink.next({ command: mock })
+    await executorLink.next({ command })
 
-    expect(mock.execute).toHaveBeenCalled()
+    verify(commandMock.execute(anything())).once()
   })
 
   it('should execute a given command with parameters', async () => {
-    expect.assertions(1)
-    const { executorLink } = setup()
-    const mock: Command = {
-      execute: jest.fn()
-    }
+    const { executorLink, commandMock, command } = setup()
+    when(commandMock.execute(anything())).thenResolve()
 
-    await executorLink.next({ command: mock, options: 42 })
+    await executorLink.next({ command, options: 42 })
 
-    expect(mock.execute).toHaveBeenCalledWith(42)
+    verify(commandMock.execute(42)).once()
   })
 
   it('should set the result', async () => {
-    expect.assertions(1)
-    const { executorLink } = setup()
-    const mock: Command<number> = {
-      execute: () => Promise.resolve(42)
-    }
-    const context: Context = { command: mock, options: 42 }
+    const { executorLink, command, commandMock } = setup()
+    when(commandMock.execute(anything())).thenResolve(42)
+    const context: Context = { command }
 
     await executorLink.next(context)
 
@@ -42,7 +34,11 @@ describe('ExecutorLink', () => {
 })
 
 function setup() {
+  const command = mock<Command<unknown, unknown>>()
+  when(command.execute(anything())).thenResolve()
   return {
+    command: instance(command),
+    commandMock: command,
     executorLink: new ExecutorLink()
   }
 }

@@ -8,7 +8,7 @@ export class SpinnerCommandDecorator implements Command<unknown, unknown> {
     private readonly store: SpinnerStore
   ) {}
 
-  async execute(options: unknown) {
+  async execute(options?: unknown) {
     this.store.showSpinner()
     const result = await this.commandToBeDecorated.execute(options)
     await wait(2)

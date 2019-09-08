@@ -4,13 +4,13 @@ interface Car {
 }
 
 export class GasolineCar implements Car {
-  public run() {
+  run() {
     return 'Gasoline car'
   }
 }
 
 export class ElectricCar implements Car {
-  public run() {
+  run() {
     return 'Electric car'
   }
 }

@@ -12,8 +12,12 @@ interface Charger {
   charge: () => void
 }
 
-class HybridCar implements Refiller, Charger {
-  public charge() {}
+export class HybridCar implements Refiller, Charger {
+  charge() {}
 
-  public refuel() {}
+  refuel() {}
+}
+
+export class ElectricCar implements Refiller {
+  refuel() {}
 }

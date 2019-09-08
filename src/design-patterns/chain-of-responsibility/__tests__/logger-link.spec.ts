@@ -1,10 +1,8 @@
 import { LoggerLink } from '../logger-link'
 import { mockDate, RealDate } from '../../../../test/utils/mock-date'
 import { Command } from '../../command/command'
-
-class MockCommand implements Command {
-  async execute(): Promise<void> {}
-}
+import { capture, instance, mock } from 'ts-mockito'
+import { Logger } from '../logger'
 
 describe('LoggerLink', () => {
   beforeAll(() => {
@@ -16,26 +14,24 @@ describe('LoggerLink', () => {
   })
 
   it('should log a command', async () => {
-    expect.assertions(1)
-    const { logger, loggerLink } = setup()
+    const { logger, loggerLink, command } = setup()
 
     await loggerLink.next({
-      command: new MockCommand(),
+      command,
       result: 42
     })
 
-    expect(logger.log).toHaveBeenCalledWith(
-      '2019-04-15T13:00:00.000Z - MockCommand - 42'
-    )
+    const [message] = capture(logger.log).last()
+    expect(message).toEqual('2019-04-15T13:00:00.000Z - Object - 42')
   })
 })
 
 function setup() {
-  const logger = {
-    log: jest.fn()
-  }
+  const logger = mock<Logger>()
+  const command = mock<Command>()
   return {
     logger,
-    loggerLink: new LoggerLink(logger)
+    loggerLink: new LoggerLink(instance(logger)),
+    command: instance(command)
   }
 }

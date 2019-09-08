@@ -1,16 +1,16 @@
 // "objects in a program should be replaceable with instances of their subtypes without altering the correctness of that program." See also design by contract.
-interface Car {
+export interface Car {
   run: () => string
 }
 
 export class GasolineCar implements Car {
-  public run() {
+  run() {
     return 'Gasoline car'
   }
 }
 
 export class ElectricCar implements Car {
-  public run() {
+  run() {
     return 'Electric car'
   }
 }

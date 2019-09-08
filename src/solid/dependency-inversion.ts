@@ -8,29 +8,29 @@ export interface Engine {
 }
 
 export class GasolineEngine implements Engine {
-  public accelerate() {
+  accelerate() {
     return 'Gasoline engine'
   }
 }
 
 export class ElectricEngine implements Engine {
-  public accelerate() {
+  accelerate() {
     return 'Electric engine'
   }
 }
 
 export class GasolineCar implements Car {
-  public constructor(private readonly engine: Engine) {}
+  constructor(private readonly engine: Engine) {}
 
-  public run() {
+  run() {
     return this.engine.accelerate()
   }
 }
 
 export class ElectricCar implements Car {
-  public constructor(private readonly engine: Engine) {}
+  constructor(private readonly engine: Engine) {}
 
-  public run() {
+  run() {
     return this.engine.accelerate()
   }
 }

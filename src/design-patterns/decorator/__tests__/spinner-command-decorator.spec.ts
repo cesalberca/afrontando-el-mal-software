@@ -2,6 +2,7 @@ import { SpinnerCommandDecorator } from '../spinner-command-decorator'
 import { SpinnerStore } from '../spinner-store'
 import { anything, deepEqual, instance, mock, verify, when } from 'ts-mockito'
 import { Command } from '../../command/command'
+import { Waiter } from '../../../utils/waiter'
 
 describe('SpinnerCommandDecorator', () => {
   it("should call store's show spinner", async () => {
@@ -41,10 +42,12 @@ describe('SpinnerCommandDecorator', () => {
 function setup() {
   const spinnerStore = mock(SpinnerStore)
   const command = mock<Command<string, { foo: 'bar' }>>()
+  const waiter = mock(Waiter)
   return {
     spinnerCommandDecorator: new SpinnerCommandDecorator(
       instance(command),
-      instance(spinnerStore)
+      instance(spinnerStore),
+      instance(waiter)
     ),
     spinnerStore,
     command

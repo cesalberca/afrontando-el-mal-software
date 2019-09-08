@@ -1,7 +1,6 @@
 import { Link } from './link'
 import { EmptyLink } from './empty-link'
 import { Context } from './context'
-import { wait } from '../../utils/wait'
 
 export class ExecutorLink implements Link {
   private nextLink: Link = new EmptyLink()

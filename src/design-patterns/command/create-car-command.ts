@@ -1,15 +1,8 @@
 import { Command } from './command'
-import {
-  GasolineCar,
-  GasolineEngine,
-  Engine,
-  Car
-} from '../../solid/dependency-inversion'
+import { CarFactory, Vehicle } from '../../solid/dependency-inversion'
 
-export class CreateCarCommand implements Command<Car> {
-  async execute(): Promise<Car> {
-    const gasolineEngine: Engine = new GasolineEngine()
-    const gasolineCar: Car = new GasolineCar(gasolineEngine)
-    return gasolineCar
+export class CreateCarCommand implements Command<Vehicle> {
+  async execute(): Promise<Vehicle> {
+    return CarFactory.build('electric')
   }
 }

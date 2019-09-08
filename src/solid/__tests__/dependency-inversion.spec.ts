@@ -1,20 +1,49 @@
-import { Engine, GasolineCar } from '../dependency-inversion'
+import {
+  Car,
+  CarFactory,
+  ElectricEngine,
+  Engine,
+  GasolineEngine
+} from '../dependency-inversion'
 import { instance, mock, verify } from 'ts-mockito'
 
-describe('GasolineCar', () => {
-  it('should race cars', () => {
-    const { gasolineCar, mockedEngine } = setup()
+describe('Car', () => {
+  it('should move', () => {
+    const { car, engine } = setup()
 
-    gasolineCar.run()
+    car.move()
 
-    verify(mockedEngine.accelerate()).once()
+    verify(engine.accelerate()).once()
+  })
+})
+
+describe('GasolineEngine', () => {
+  it('should run', () => {
+    const { gasolineEngine } = setup()
+
+    const actual = gasolineEngine.accelerate()
+
+    expect(actual).toBe('Gasoline engine')
+  })
+})
+
+describe('ElectricEngine', () => {
+  it('should run', () => {
+    const { electricEngine } = setup()
+
+    const actual = electricEngine.accelerate()
+
+    expect(actual).toBe('Electric engine')
   })
 })
 
 function setup() {
-  const mockedEngine = mock<Engine>()
+  const engine = mock<Engine>()
   return {
-    gasolineCar: new GasolineCar(instance(mockedEngine)),
-    mockedEngine
+    gasolineEngine: new GasolineEngine(),
+    electricEngine: new ElectricEngine(),
+    car: new Car(instance(engine)),
+    engine,
+    carFactory: CarFactory
   }
 }

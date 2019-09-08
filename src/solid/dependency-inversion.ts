@@ -1,6 +1,6 @@
 // one should "depend upon abstractions, [not] concretions."
-export interface Car {
-  run: () => string
+export interface Vehicle {
+  move: () => string
 }
 
 export interface Engine {
@@ -19,30 +19,23 @@ export class ElectricEngine implements Engine {
   }
 }
 
-export class GasolineCar implements Car {
+export class Car implements Vehicle {
   constructor(private readonly engine: Engine) {}
 
-  run() {
+  move() {
     return this.engine.accelerate()
   }
 }
 
-export class ElectricCar implements Car {
-  constructor(private readonly engine: Engine) {}
-
-  run() {
-    return this.engine.accelerate()
+export class CarFactory {
+  static build(type: 'electric' | 'gasoline') {
+    switch (type) {
+      case 'electric':
+        return new Car(new ElectricEngine())
+      case 'gasoline':
+        return new Car(new GasolineEngine())
+      default:
+        return new Car(new ElectricEngine())
+    }
   }
-}
-
-export function race() {
-  const gasolineEngine: Engine = new GasolineEngine()
-  const electricEngine: Engine = new ElectricEngine()
-
-  const gasolineCar: Car = new GasolineCar(gasolineEngine)
-  const electricCar: Car = new ElectricCar(electricEngine)
-
-  const cars = [gasolineCar, electricCar]
-
-  return cars.map(car => car.run())
 }

@@ -1,4 +1,4 @@
-import { HybridCar } from '../interface-segregation'
+import { HybridCar } from '../interface-segregation-good'
 
 describe('HybridCar', () => {
   it('should be a Refiller', () => {

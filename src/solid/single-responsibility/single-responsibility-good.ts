@@ -1,14 +1,6 @@
 // A class (line, test, module, system, etc) should have only a single responsibility (i.e. only changes to one part of the software's specification should be able to affect the specification of itself).
-export class Car {
-  run() {}
 
-  stop() {}
-
-  tiresNeedToBeChanged() {}
-
-  shouldRefuel() {}
-}
-
+// Good 👍
 export class Tire {
   needsChange() {
     return false
@@ -29,7 +21,7 @@ export class Brakes {
   brake() {}
 }
 
-export class SolidCar {
+export class Car {
   private readonly brakes = new Brakes()
   private readonly engine = new Engine()
   private readonly tires: Tire[] = [

@@ -1,6 +1,8 @@
 // "objects in a program should be replaceable with instances of their subtypes without altering the correctness of that program." See also design by contract.
+
+// Bad 👎
 export interface Car {
-  run: () => string
+  run(): string
 }
 
 export class GasolineCar implements Car {
@@ -16,8 +18,8 @@ export class ElectricCar implements Car {
 }
 
 export function race() {
-  const gasolineCar: Car = new GasolineCar()
-  const electricCar: Car = new ElectricCar()
+  const gasolineCar = new GasolineCar()
+  const electricCar = new ElectricCar()
 
   const cars = [gasolineCar, electricCar]
 

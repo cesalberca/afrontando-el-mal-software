@@ -1,9 +1,6 @@
 // "many client-specific interfaces are better than one general-purpose interface."
-interface Car {
-  refuel: () => void
-  charge: () => void
-}
 
+// Good 👍
 interface Refiller {
   refuel: () => void
 }

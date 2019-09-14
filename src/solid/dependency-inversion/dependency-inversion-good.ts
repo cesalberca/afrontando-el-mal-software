@@ -1,22 +1,20 @@
 // one should "depend upon abstractions, [not] concretions."
+
+// Good 👍
 export interface Vehicle {
-  move: () => string
+  move(): void
 }
 
 export interface Engine {
-  accelerate: () => string
+  accelerate(): void
 }
 
 export class GasolineEngine implements Engine {
-  accelerate() {
-    return 'Gasoline engine'
-  }
+  accelerate() {}
 }
 
 export class ElectricEngine implements Engine {
-  accelerate() {
-    return 'Electric engine'
-  }
+  accelerate() {}
 }
 
 export class Car implements Vehicle {
@@ -35,7 +33,7 @@ export class CarFactory {
       case 'gasoline':
         return new Car(new GasolineEngine())
       default:
-        return new Car(new ElectricEngine())
+        throw new Error(`Can't convert type ${type} to car`)
     }
   }
 }

@@ -32,7 +32,7 @@ export class Car {
   ]
   private readonly fuelTank = new FuelTank()
 
-  run() {
+  move() {
     this.engine.accelerate()
   }
 

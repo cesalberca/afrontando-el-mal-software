@@ -6,8 +6,7 @@ export class ExecutorLink implements Link {
   private nextLink: Link = new EmptyLink()
 
   async next(context: Context) {
-    const result = await context.command.execute(context.options)
-    context.result = result
+    context.result = await context.command.execute(context.options)
     this.nextLink.next(context)
   }
 

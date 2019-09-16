@@ -2,17 +2,17 @@
 
 // Good 👍
 export interface Car {
-  run(): string
+  move(): string
 }
 
 class GasolineCar implements Car {
-  run() {
+  move() {
     return 'Gasoline car'
   }
 }
 
 class ElectricCar implements Car {
-  run() {
+  move() {
     return 'Electric car'
   }
 }
@@ -23,5 +23,5 @@ export function race() {
 
   const cars = [gasolineCar, electricCar]
 
-  return cars.map(car => car.run())
+  return cars.map(car => car.move())
 }

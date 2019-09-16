@@ -1,5 +1,8 @@
 import { CreateCarCommand } from '../create-car-command'
-import { CarFactory, Vehicle } from "../../../solid/dependency-inversion/dependency-inversion-good";
+import {
+  CarFactory,
+  Vehicle
+} from '../../../solid/dependency-inversion/dependency-inversion-good'
 
 describe('CreateCarCommand', () => {
   it('should create a car', async () => {

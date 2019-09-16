@@ -2,6 +2,8 @@ import { Chain } from './design-patterns/chain-of-responsibility/chain'
 import { fromEvent } from 'rxjs'
 import { SpinnerStore } from './design-patterns/decorator/spinner-store'
 import { tap } from 'rxjs/operators'
+import { Waiter } from './utils/waiter'
+import { PageLogger } from './design-patterns/page-logger'
 
 document.getElementById('app').innerHTML = `
 <div class="spinner">
@@ -10,6 +12,11 @@ document.getElementById('app').innerHTML = `
 <main class="content">
   <h1>A<strong>front</strong>ando el mal software</h1>
   <button id="run">Ejecutar</button>
+  <h2>Logs de comandos</h2>
+  <div id="command-logs"></div>
+  
+  <h2>Logs de resultado de ejecución</h2>
+  <div id="result-logs"></div>
 </main>
 `
 
@@ -29,7 +36,14 @@ store
   )
   .subscribe()
 
-const chain = new Chain(store, window.console).build()
+const commandPageLogger = new PageLogger(window, '#result-logs')
+const chain = new Chain(
+  store,
+  new PageLogger(window, '#command-logs'),
+  new Waiter(window)
+).build()
 fromEvent(document.querySelector('#run'), 'click').subscribe(() =>
-  chain.run().then(console.warn)
+  chain
+    .run()
+    .then(result => commandPageLogger.log(JSON.stringify(result, null, 2)))
 )

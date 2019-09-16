@@ -2,7 +2,7 @@
 
 // Bad 👎
 export class Car {
-  run() {}
+  move() {}
 
   stop() {}
 

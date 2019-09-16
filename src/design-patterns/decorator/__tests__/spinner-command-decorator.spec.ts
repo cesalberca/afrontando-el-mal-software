@@ -8,7 +8,7 @@ describe('SpinnerCommandDecorator', () => {
   it("should call store's show spinner", async () => {
     const { spinnerCommandDecorator, spinnerStore } = setup()
 
-    await spinnerCommandDecorator.execute()
+    await spinnerCommandDecorator.execute({ foo: 'bar' })
 
     verify(spinnerStore.showSpinner()).once()
   })
@@ -16,7 +16,7 @@ describe('SpinnerCommandDecorator', () => {
   it("should call store's hide spinner after executing the command", async () => {
     const { spinnerCommandDecorator, spinnerStore } = setup()
 
-    await spinnerCommandDecorator.execute()
+    await spinnerCommandDecorator.execute({ foo: 'bar' })
 
     verify(spinnerStore.hideSpinner()).once()
   })
@@ -33,7 +33,7 @@ describe('SpinnerCommandDecorator', () => {
     const { command, spinnerCommandDecorator } = setup()
     when(command.execute(anything())).thenResolve('baz')
 
-    const actual = await spinnerCommandDecorator.execute()
+    const actual = await spinnerCommandDecorator.execute({ foo: 'bar' })
 
     expect(actual).toBe('baz')
   })

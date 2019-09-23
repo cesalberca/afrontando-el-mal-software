@@ -1,27 +1,23 @@
-// "objects in a program should be replaceable with instances of their subtypes without altering the correctness of that program." See also design by contract.
+// Derived types must be completely substitutable for their base types.
 
 // Bad 👎
-export interface Car {
-  move(): string
+export class Car {
+  move() {}
 }
 
-export class GasolineCar implements Car {
+export class BrokenCar extends Car {
   move() {
-    return 'Gasoline car'
+    throw new Error("I can't move")
   }
 }
 
-export class ElectricCar implements Car {
-  move() {
-    return 'Electric car'
-  }
-}
+export class ElectricCar extends Car {}
 
 export function race() {
-  const gasolineCar = new GasolineCar()
-  const electricCar = new ElectricCar()
+  const brokenCar: Car = new BrokenCar()
+  const electricCar: Car = new ElectricCar()
 
-  const cars = [gasolineCar, electricCar]
+  const cars = [brokenCar, electricCar]
 
   return cars.map(car => car.move())
 }

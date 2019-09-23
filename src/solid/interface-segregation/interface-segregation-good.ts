@@ -2,11 +2,11 @@
 
 // Good 👍
 export interface Refiller {
-  refuel: () => void
+  refuel(): void
 }
 
 export interface Charger {
-  charge: () => void
+  charge(): void
 }
 
 export class HybridCar implements Refiller, Charger {

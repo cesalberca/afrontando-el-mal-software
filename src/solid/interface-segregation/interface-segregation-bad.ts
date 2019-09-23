@@ -2,8 +2,8 @@
 
 // Bad 👎
 interface Car {
-  refuel: () => void
-  charge: () => void
+  refuel(): void
+  charge(): void
 }
 
 export class HybridCar implements Car {

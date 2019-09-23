@@ -26,7 +26,7 @@ export class Car implements Vehicle {
 }
 
 export class CarFactory {
-  static build(type: 'electric' | 'gasoline') {
+  static build(type: 'electric' | 'gasoline'): Car {
     switch (type) {
       case 'electric':
         return new Car(new ElectricEngine())

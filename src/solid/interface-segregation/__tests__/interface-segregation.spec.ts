@@ -1,19 +1,19 @@
-import { HybridCar } from '../interface-segregation-good'
+import { ElectricCar, HybridCar } from '../interface-segregation-good'
 
 describe('HybridCar', () => {
   it('should be a Refiller', () => {
     expect(HybridCar.prototype.charge).toBeDefined()
   })
 
-  itShouldBeACharger()
+  itShouldBeACharger(HybridCar)
 })
 
 describe('ElectricCar', () => {
-  itShouldBeACharger()
+  itShouldBeACharger(ElectricCar)
 })
 
-function itShouldBeACharger() {
+function itShouldBeACharger(clazz: any) {
   it('should be a Charger', () => {
-    expect(HybridCar.prototype.refuel).toBeDefined()
+    expect(clazz.prototype.refuel).toBeDefined()
   })
 }

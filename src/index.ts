@@ -25,13 +25,12 @@ store
   .get()
   .pipe(
     tap(state => {
-      document
-        .querySelector('.content')
-        .classList.toggle('is-loading', state.isLoading)
-
-      document
-        .querySelector('.spinner')
-        .classList.toggle('show', state.isLoading)
+      const addClassTo = (cssClass: string, selector: string) =>
+        document
+          .querySelector(selector)
+          .classList.toggle(cssClass, state.isLoading)
+      addClassTo('is-loading', '.content')
+      addClassTo('show', '.spinner')
     })
   )
   .subscribe()
@@ -42,6 +41,7 @@ const chain = new Chain(
   new PageLogger(window, '#command-logs'),
   new Waiter(window)
 ).build()
+
 fromEvent(document.querySelector('#run'), 'click').subscribe(() =>
   chain
     .run()

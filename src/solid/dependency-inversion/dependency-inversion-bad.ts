@@ -18,7 +18,6 @@ export class ElectricEngine implements Engine {
 }
 
 export class GasolineCar implements Vehicle {
-  // ¿Lo podríamos hacer público para testearlo?
   private readonly engine: Engine = new GasolineEngine()
 
   move() {
@@ -27,7 +26,6 @@ export class GasolineCar implements Vehicle {
 }
 
 export class ElectricCar implements Vehicle {
-  // ¿Lo podríamos hacer público para testearlo?
   private readonly engine: Engine = new ElectricEngine()
 
   move() {

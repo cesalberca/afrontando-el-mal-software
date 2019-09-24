@@ -1,9 +1,9 @@
 import { Chain } from './design-patterns/chain-of-responsibility/chain'
 import { fromEvent } from 'rxjs'
-import { SpinnerStore } from './design-patterns/decorator/spinner-store'
 import { tap } from 'rxjs/operators'
 import { Waiter } from './utils/waiter'
 import { PageLogger } from './design-patterns/page-logger'
+import { ServiceLocator } from './design-patterns/decorator/service-locator'
 
 document.getElementById('app').innerHTML = `
 <div class="spinner">
@@ -20,7 +20,7 @@ document.getElementById('app').innerHTML = `
 </main>
 `
 
-const store = new SpinnerStore()
+const store = ServiceLocator.spinnerStore
 store
   .get()
   .pipe(

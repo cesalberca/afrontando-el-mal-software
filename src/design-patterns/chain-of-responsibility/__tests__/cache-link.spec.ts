@@ -1,33 +1,34 @@
 import { CacheLink } from '../cache-link'
-import { anything, capture, instance, mock, verify } from 'ts-mockito'
 import { Command } from '../../command/command'
-import { EmptyLink } from '../empty-link'
-import { Link } from '../link'
 
 describe('CacheLink', () => {
-  xit('should not call the command twice', async () => {
+  it('should call setNext once', async () => {
     const { cacheLink, command, nextLink } = setup()
 
     await cacheLink.next({ command })
     await cacheLink.next({ command })
+    await cacheLink.next({ command })
 
-    const [captured] = capture(nextLink.next).last()
-
-    expect(captured).toEqual('')
-
-    verify(nextLink.next(anything())).once()
+    expect(nextLink.next).toHaveBeenCalledTimes(1)
   })
 })
 
 function setup() {
-  const mockedCommand = mock<Command>()
-  const nextLink = mock<Link>()
+  const mockedCommand = jest.fn()
+  class CommandMock implements Command {
+    async execute(): Promise<void> {}
+  }
+  const command = new CommandMock()
+  const nextLink = {
+    next: jest.fn(),
+    setNext: jest.fn()
+  }
   const cacheLink = new CacheLink()
   cacheLink.setNext(nextLink)
   return {
     mockedCommand,
     nextLink,
-    command: instance(mockedCommand),
+    command,
     cacheLink
   }
 }

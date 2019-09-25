@@ -19,11 +19,11 @@ export class Plane {
 
 export class MovementCalculator {
   calculate(vehicles: (Plane | Truck)[]) {
-    return vehicles.reduce((previousValue, currentValue) => {
-      if (currentValue instanceof Truck) {
-        return previousValue + currentValue.velocity
-      } else if (currentValue instanceof Plane) {
-        return previousValue + currentValue.speed
+    return vehicles.reduce((previous, current) => {
+      if (current instanceof Truck) {
+        return previous + current.velocity
+      } else if (current instanceof Plane) {
+        return previous + current.speed
       }
     }, 0)
   }

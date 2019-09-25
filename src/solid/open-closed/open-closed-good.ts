@@ -20,9 +20,6 @@ class Plane implements Vehicle {
 
 export class MovementCalculator {
   calculate(vehicles: Vehicle[]) {
-    return vehicles.reduce(
-      (previousValue, currentValue) => previousValue + currentValue.move(),
-      0
-    )
+    return vehicles.reduce((previous, current) => previous + current.move(), 0)
   }
 }

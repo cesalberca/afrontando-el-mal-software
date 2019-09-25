@@ -12,12 +12,16 @@ export class LoggerLink implements Link {
     this.logger.log(
       `${new Date().toISOString()} - ${
         context.command.constructor.name
-      } - ${JSON.stringify(context.result, null, 2)}`
+      } - ${this.printResult(context.result)}`
     )
     this.nextLink.next(context)
   }
 
   setNext(link: Link) {
     this.nextLink = link
+  }
+
+  private printResult(result: unknown) {
+    return JSON.stringify(result, null, 2)
   }
 }

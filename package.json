@@ -7,7 +7,7 @@
     "start": "parcel index.html --open",
     "lint": "prettier --write 'src/**/*.ts'",
     "build": "parcel build index.html",
-    "test": "jest --coverage"
+    "test": "jest"
   },
   "dependencies": {
     "rxjs": "6.5.2"
